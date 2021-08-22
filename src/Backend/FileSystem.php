@@ -23,7 +23,7 @@ class FileSystem extends AbstractBackend
 
     protected function write_file(string $zone, string $key, string $contents)
     {
-        $full_path = $this->get_path($zone, $key);
+        $full_path = $this->get_path($zone, urlencode($key));
         $dir = dirname($full_path);
 
         if (!is_dir($dir)) {
@@ -40,7 +40,7 @@ class FileSystem extends AbstractBackend
 
     protected function read_file(string $zone, string $key): ?string
     {
-        $full_path = $this->get_path($zone, $key);
+        $full_path = $this->get_path($zone, urlencode($key));
 
         // it is cool to not exists
         $contents = @file_get_contents($full_path);
